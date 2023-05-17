@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -12,7 +12,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
-  const[selectedCard, setSelectedCard] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   function handleCardClick(card) {
     setSelectedCard(card)
@@ -34,7 +34,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -47,7 +47,7 @@ function App() {
         onCardClick={handleCardClick}
       />
       <Footer />
-      <PopupWithForm name='profile' title='Редактировать профиль' buttonText='Сохранить' isOpen={isEditProfilePopupOpen}  onClose={closeAllPopups}>
+      <PopupWithForm name='profile' title='Редактировать профиль' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <input type='text' className='popup__input popup__input_name_value' name="nameuser" id="nameuser"
           placeholder="Имя" minLength="2" maxLength="40" title="Длина поля должна быть 2 и более символов и менее или равно 40" required />
         <span className="popup__item-error nameuser-error" />
@@ -65,7 +65,7 @@ function App() {
         <span className="popup__item-error linkcard-error" />
       </PopupWithForm>
 
-      <PopupWithForm name='avatar' title='Обновить аватар' buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm name='avatar' title='Обновить аватар' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
         <input type='url' className='popup__input popup__input_link_value' name="avatar" id="avatar"
           placeholder="Ссылка на картинку" required />
         <span className="popup__item-error nameuser-error" />
