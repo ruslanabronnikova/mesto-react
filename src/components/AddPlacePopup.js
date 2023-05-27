@@ -1,7 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onNewCard }) {
+
+  useEffect(() => {
+    if (isOpen) {
+      // Обнуление значений полей формы при открытии
+      nameRef.current.value = '';
+      linkRef.current.value = '';
+    }
+  }, [isOpen]);
 
   const nameRef = useRef(null);
   const linkRef = useRef(null);
@@ -13,10 +21,6 @@ function AddPlacePopup({ isOpen, onClose, onNewCard }) {
       name: nameRef.current.value,
       link: linkRef.current.value
     })
-
-    // Сброс значений полей формы
-    nameRef.current.value = '';
-    linkRef.current.value = '';
   }
 
   return (

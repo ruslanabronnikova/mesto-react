@@ -26,7 +26,7 @@ function App() {
     Promise.all([api.getInitialCards(), api.getInfoUsers()])
       .then(([initialCards, userData]) => {
         setCurrentUser(userData);
-        setCards(initialCards); //это нужно будет передать из кард 
+        setCards(initialCards); 
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -62,14 +62,20 @@ function App() {
 
     api.changeLikeCard(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
   }
 
   function handleCardDeleteCard(card) {
 
     api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));
-    });
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
   }
 
   function handleUpdateUser({ name, about }) {

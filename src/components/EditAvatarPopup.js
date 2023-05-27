@@ -1,8 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const avatarRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Обнуление значений полей формы при открытии
+      avatarRef.current.value = '';
+    }
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
